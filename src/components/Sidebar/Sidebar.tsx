@@ -12,8 +12,11 @@ const history = createBrowserHistory();
 
 const Container = styled.aside`
     background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
     width: 18vw;
-    height: 100vh;
     padding: 20px;
     box-sizing: border-box;
 `;
