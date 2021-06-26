@@ -66,17 +66,17 @@ function Sidebar() {
             <Router history={history}>
                 <SectionsList onClick={handleClick}>
                     <SectionsListItem>
-                        <Link to="#" id='General Overview' className={tabActive === 'General Overview' ? 'tab-active' : ''}>
+                        <Link to="/" id='General Overview' className={tabActive === 'General Overview' ? 'tab-active' : ''}>
                             <BiHomeAlt style={SVGTransformStyle} /> General Overview
                         </Link>
                     </SectionsListItem>
                     <SectionsListItem>
-                        <Link to="#" id='Device View' className={tabActive === 'Device View' ? 'tab-active' : ''}>
+                        <Link to="device-view" id='Device View' className={tabActive === 'Device View' ? 'tab-active' : ''}>
                             <BiFolder style={SVGTransformStyle} /> Device View
                         </Link>
                     </SectionsListItem>
                     <SectionsListItem>
-                        <Link to="#" id='Billing' className={tabActive === 'Billing' ? 'tab-active' : ''}>
+                        <Link to="billing" id='Billing' className={tabActive === 'Billing' ? 'tab-active' : ''}>
                             <BiFile style={SVGTransformStyle} /> Billing
                         </Link>
                     </SectionsListItem>

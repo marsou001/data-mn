@@ -69,7 +69,7 @@ function Topbar() {
             content: "15.07 - 15.08",
         },
         {
-            id: 0,
+            id: 2,
             content: "15.08 - 15.09",
         },
     ];
