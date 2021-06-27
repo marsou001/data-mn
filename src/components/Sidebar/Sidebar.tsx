@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Router } from "react-router";
+import { Router, useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { BiHomeAlt, BiFolder, BiFile } from "react-icons/bi";
@@ -47,6 +47,8 @@ const SVGTransformStyle = {
 function Sidebar() {
     const [tabActive, setTabActive] = useState<TTab>("General Overview");
 
+    // const location = useLocation();
+
     const handleClick = (e: React.MouseEvent<HTMLUListElement>) => {
         const target = e.target as HTMLAnchorElement; 
         
@@ -58,12 +60,20 @@ function Sidebar() {
         setTabActive(target.id as TTab);
     };
 
+    // useEffect(() => {
+    //     if (location.pathname === '/') {
+    //         setTabActive("General Overview");
+    //         return;
+    //     }
+    //     setTabActive(location.pathname as TTab);
+        
+    // }, [location.pathname]);
+
     return (
         <Container>
             <Logo>
                 <img src={logo} alt="logo" />
             </Logo>
-            <Router history={history}>
                 <SectionsList onClick={handleClick}>
                     <SectionsListItem>
                         <Link to="/" id='General Overview' className={tabActive === 'General Overview' ? 'tab-active' : ''}>
@@ -71,17 +81,16 @@ function Sidebar() {
                         </Link>
                     </SectionsListItem>
                     <SectionsListItem>
-                        <Link to="device-view" id='Device View' className={tabActive === 'Device View' ? 'tab-active' : ''}>
+                        <Link to="/device-view" id='Device View' className={tabActive === 'Device View' ? 'tab-active' : ''}>
                             <BiFolder style={SVGTransformStyle} /> Device View
                         </Link>
                     </SectionsListItem>
                     <SectionsListItem>
-                        <Link to="billing" id='Billing' className={tabActive === 'Billing' ? 'tab-active' : ''}>
+                        <Link to="/billing" id='Billing' className={tabActive === 'Billing' ? 'tab-active' : ''}>
                             <BiFile style={SVGTransformStyle} /> Billing
                         </Link>
                     </SectionsListItem>
                 </SectionsList>
-            </Router>
         </Container>
     );
 }

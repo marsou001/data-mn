@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import { Router, Route } from "react-router";
-import { createBrowserHistory } from "history";
+import { Switch, Route } from "react-router-dom";
 import Billing from "./Billing/Billing";
 import DeviceView from "./DeviceView/DeviceView";
 import GeneralOverview from "./GeneralOverview/GeneralOverview";
-
-const history = createBrowserHistory();
 
 const Container = styled.main`
     padding: 20px;
@@ -14,11 +11,12 @@ const Container = styled.main`
 function Main() {
     return (
         <Container>
-            <Router history={history}>
-                <Route path="/" exact component={GeneralOverview} />
-                <Route path="device-view" component={DeviceView} />
-                <Route path="billing" component={Billing} />
-            </Router>
+            
+                <Switch>
+                    <Route path="/" exact component={GeneralOverview} />
+                    <Route path="/device-view" component={DeviceView} />
+                    <Route path="/billing" component={Billing} />
+                </Switch>
         </Container>
     );
 }
