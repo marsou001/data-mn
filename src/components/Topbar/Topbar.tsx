@@ -2,10 +2,14 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.header`
-    display: flex;
-    justify-content: space-between;
     padding: 20px;
     border-bottom: 1px solid black;
+`;
+
+const FlexContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
 `;
 
 const SelectDropDownContainer = styled.div`
@@ -89,8 +93,10 @@ function Topbar() {
         },
     ];
 
-    const handleTimePeriodClick = () => setIsTimePeriodActive((prevState) => !prevState);
-    const handleNeighborhoodClick = () => setIsNeighborhoodActive((prevState) => !prevState);
+    const handleTimePeriodClick = () =>
+        setIsTimePeriodActive((prevState) => !prevState);
+    const handleNeighborhoodClick = () =>
+        setIsNeighborhoodActive((prevState) => !prevState);
 
     const handleTimePeriodChange = (e: React.MouseEvent<HTMLUListElement>) => {
         const target = e.target as HTMLLIElement;
@@ -106,37 +112,45 @@ function Topbar() {
 
     return (
         <Container>
-            <SelectDropDownContainer>
-                <SelectDropdownOption onClick={handleTimePeriodClick}>
-                    <p>time period</p> <span>{timePeriod}</span>
-                </SelectDropdownOption>
-                <SelectDropdownOptions
-                    className={!isTimePeriodActive ? "is-time-period-active" : ""}
-                    onClick={handleTimePeriodChange}
-                >
-                    {timePeriods.map(({ id, content }) => (
-                        <li key={id}>{content}</li>
-                    ))}
-                </SelectDropdownOptions>
-            </SelectDropDownContainer>
-            <SelectDropDownContainer>
-                <SelectDropdownOption onClick={handleNeighborhoodClick}>
-                    <p>Neighborhood</p> <span>{neighborhood}</span>
-                </SelectDropdownOption>
-                <SelectDropdownOptions
-                    className={!isNeighborhoodActive ? "is-neighborhood-active" : ""}
-                    onClick={handleNeighborhoodChange}
-                >
-                    {neighborhoods.map(({ id, content }) => (
-                        <li key={id}>{content}</li>
-                    ))}
-                </SelectDropdownOptions>
-            </SelectDropDownContainer>
-            <SelectDropDownContainer>
-                <SelectDropdownOption>
-                    <p>Number devices</p> <span>22</span>
-                </SelectDropdownOption>
-            </SelectDropDownContainer>
+            <FlexContainer>
+                <SelectDropDownContainer>
+                    <SelectDropdownOption onClick={handleTimePeriodClick}>
+                        <p>time period</p> <span>{timePeriod}</span>
+                    </SelectDropdownOption>
+                    <SelectDropdownOptions
+                        className={
+                            !isTimePeriodActive ? "is-time-period-active" : ""
+                        }
+                        onClick={handleTimePeriodChange}
+                    >
+                        {timePeriods.map(({ id, content }) => (
+                            <li key={id}>{content}</li>
+                        ))}
+                    </SelectDropdownOptions>
+                </SelectDropDownContainer>
+                <SelectDropDownContainer>
+                    <SelectDropdownOption onClick={handleNeighborhoodClick}>
+                        <p>Neighborhood</p> <span>{neighborhood}</span>
+                    </SelectDropdownOption>
+                    <SelectDropdownOptions
+                        className={
+                            !isNeighborhoodActive
+                                ? "is-neighborhood-active"
+                                : ""
+                        }
+                        onClick={handleNeighborhoodChange}
+                    >
+                        {neighborhoods.map(({ id, content }) => (
+                            <li key={id}>{content}</li>
+                        ))}
+                    </SelectDropdownOptions>
+                </SelectDropDownContainer>
+                <SelectDropDownContainer>
+                    <SelectDropdownOption>
+                        <p>Number devices</p> <span>22</span>
+                    </SelectDropdownOption>
+                </SelectDropDownContainer>
+            </FlexContainer>
         </Container>
     );
 }
