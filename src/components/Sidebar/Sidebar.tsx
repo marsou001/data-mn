@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Router, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
-import { createBrowserHistory } from "history";
 import { BiHomeAlt, BiFolder, BiFile } from "react-icons/bi";
 import logo from "../../images/logo.png";
 
 type TTab = "General Overview" | "Device View" | "Billing";
-
-const history = createBrowserHistory();
 
 const Container = styled.aside`
     background-color: #fff;
@@ -47,7 +44,7 @@ const SVGTransformStyle = {
 function Sidebar() {
     const [tabActive, setTabActive] = useState<TTab>("General Overview");
 
-    // const location = useLocation();
+    const location = useLocation();
 
     const handleClick = (e: React.MouseEvent<HTMLUListElement>) => {
         const target = e.target as HTMLAnchorElement; 
@@ -60,14 +57,14 @@ function Sidebar() {
         setTabActive(target.id as TTab);
     };
 
-    // useEffect(() => {
-    //     if (location.pathname === '/') {
-    //         setTabActive("General Overview");
-    //         return;
-    //     }
-    //     setTabActive(location.pathname as TTab);
+    useEffect(() => {
+        if (location.pathname === '/') {
+            setTabActive("General Overview");
+            return;
+        }
+        setTabActive(location.pathname as TTab);
         
-    // }, [location.pathname]);
+    }, [location.pathname]);
 
     return (
         <Container>
