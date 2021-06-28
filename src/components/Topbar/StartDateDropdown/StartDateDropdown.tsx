@@ -20,7 +20,7 @@ function StartDateDropdown() {
                 onClick={handleStartDateChange}
             >
                 {timePeriods.map(({ id, content }) => (
-                    <li key={id}>{content}</li>
+                    <li key={id} data-function='start-date'>{content}</li>
                 ))}
             </Options>
         </Container>

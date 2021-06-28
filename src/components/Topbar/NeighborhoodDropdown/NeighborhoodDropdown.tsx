@@ -23,7 +23,7 @@ function NeighborhoodDropdown() {
                 onClick={handleNeighborhoodChange}
             >
                 {neighborhoods.map(({ id, content }) => (
-                    <li key={id}>{content}</li>
+                    <li key={id} data-function='neighborhood'>{content}</li>
                 ))}
             </Options>
         </Container>
