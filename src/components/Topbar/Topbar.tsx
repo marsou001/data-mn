@@ -1,25 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import styled from "styled-components";
-import data from "../../data.json";
-
-interface IDevices {
-    "": number;
-    "Unnamed: 0": number;
-    period: string;
-    ClientNumber: number;
-    long: number;
-    lat: number;
-    DeviceID: string;
-    Consumption: number;
-    Dynamic_Price: number;
-    Distributed: number;
-    Area: string;
-    DistributedElec: number;
-    Alerts: string;
-    "NormalPrice(MAD)": number;
-    Delta: number;
-    DeltaMAD: number;
-}
+import { Context } from "../../App";
 
 const Container = styled.header`
     padding: 20px;
@@ -80,13 +61,18 @@ const SelectDropdownOptions = styled.ul`
 `;
 
 function Topbar() {
-    const [devices, setDevices] = useState<IDevices[]>();
     const [isStartDateActive, setIsStartDateActive] = useState(false);
     const [isEndDateActive, setIsEndDateActive] = useState(false);
     const [isNeighborhoodActive, setIsNeighborhoodActive] = useState(false);
-    const [startDate, setStartDate] = useState("2011-12-31");
-    const [endDate, setEndDate] = useState("2011-12-31");
-    const [neighborhood, setNeighborhood] = useState("Agdal");
+
+    const {
+        startDate,
+        endDate,
+        neighborhood,
+        handleStartDateChange,
+        handleEndDateChange,
+        handleNeighborhoodChange,
+    } = useContext(Context);
 
     const timePeriods = [
         {
@@ -222,25 +208,6 @@ function Topbar() {
 
     const handleNeighborhoodClick = () =>
         setIsNeighborhoodActive((prevState) => !prevState);
-
-    const handleStartDateChange = (e: React.MouseEvent<HTMLUListElement>) => {
-        const target = e.target as HTMLLIElement;
-        setStartDate(target.textContent as string);
-    };
-
-    const handleEndDateChange = (e: React.MouseEvent<HTMLUListElement>) => {
-        const target = e.target as HTMLLIElement;
-        setEndDate(target.textContent as string);
-    };
-
-    const handleNeighborhoodChange = (
-        e: React.MouseEvent<HTMLUListElement>
-    ) => {
-        const target = e.target as HTMLLIElement;
-        setNeighborhood(target.textContent as string);
-    };
-
-    useEffect(() => setDevices(data), []);
 
     return (
         <Container>
