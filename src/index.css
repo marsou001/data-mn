@@ -19,7 +19,11 @@ code {
   font-weight: 600;
 }
 
-.is-time-period-active {
+.is-start-date-active {
+  display: none;
+}
+
+.is-end-date-active {
   display: none;
 }
 

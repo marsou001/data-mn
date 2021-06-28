@@ -1,5 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
+import data from "../../data.json";
+
+interface IDevices {
+    "": number;
+    "Unnamed: 0": number;
+    period: string;
+    ClientNumber: number;
+    long: number;
+    lat: number;
+    DeviceID: string;
+    Consumption: number;
+    Dynamic_Price: number;
+    Distributed: number;
+    Area: string;
+    DistributedElec: number;
+    Alerts: string;
+    "NormalPrice(MAD)": number;
+    Delta: number;
+    DeltaMAD: number;
+}
 
 const Container = styled.header`
     padding: 20px;
@@ -9,7 +29,7 @@ const Container = styled.header`
 const FlexContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 50%;
+    width: 70%;
 `;
 
 const SelectDropDownContainer = styled.div`
@@ -44,6 +64,8 @@ const SelectDropdownOptions = styled.ul`
     position: absolute;
     top: 65px;
     width 100%;
+    max-height: 200px;
+    overflow-y: auto;
     margin: 0;
     padding-left: 0;
     border-bottom-right-radius: 8px;
@@ -58,23 +80,122 @@ const SelectDropdownOptions = styled.ul`
 `;
 
 function Topbar() {
-    const [isTimePeriodActive, setIsTimePeriodActive] = useState(false);
+    const [devices, setDevices] = useState<IDevices[]>();
+    const [isStartDateActive, setIsStartDateActive] = useState(false);
+    const [isEndDateActive, setIsEndDateActive] = useState(false);
     const [isNeighborhoodActive, setIsNeighborhoodActive] = useState(false);
-    const [timePeriod, setTimePeriod] = useState("15.06 - 15.07");
+    const [startDate, setStartDate] = useState("2011-12-31");
+    const [endDate, setEndDate] = useState("2011-12-31");
     const [neighborhood, setNeighborhood] = useState("Agdal");
 
     const timePeriods = [
         {
             id: 0,
-            content: "15.06 - 15.07",
+            content: "2011-12-31",
         },
         {
             id: 1,
-            content: "15.07 - 15.08",
+            content: "2012-01-31",
         },
         {
             id: 2,
-            content: "15.08 - 15.09",
+            content: "2012-02-29",
+        },
+        {
+            id: 3,
+            content: "2012-03-31",
+        },
+        {
+            id: 4,
+            content: "2012-04-30",
+        },
+        {
+            id: 5,
+            content: "2012-05-31",
+        },
+        {
+            id: 6,
+            content: "2012-06-30",
+        },
+        {
+            id: 7,
+            content: "2012-07-31",
+        },
+        {
+            id: 8,
+            content: "2012-08-31",
+        },
+        {
+            id: 9,
+            content: "2012-09-30",
+        },
+        {
+            id: 10,
+            content: "2012-10-31",
+        },
+        {
+            id: 11,
+            content: "2012-11-30",
+        },
+        {
+            id: 12,
+            content: "2012-12-31",
+        },
+        {
+            id: 13,
+            content: "2013-01-31",
+        },
+        {
+            id: 14,
+            content: "2013-02-28",
+        },
+        {
+            id: 15,
+            content: "2013-03-31",
+        },
+        {
+            id: 16,
+            content: "2013-04-30",
+        },
+        {
+            id: 17,
+            content: "2013-05-31",
+        },
+        {
+            id: 18,
+            content: "2013-06-30",
+        },
+        {
+            id: 19,
+            content: "2013-07-31",
+        },
+        {
+            id: 20,
+            content: "2013-08-31",
+        },
+        {
+            id: 21,
+            content: "2013-09-30",
+        },
+        {
+            id: 22,
+            content: "2013-10-31",
+        },
+        {
+            id: 23,
+            content: "2013-11-30",
+        },
+        {
+            id: 24,
+            content: "2013-12-31",
+        },
+        {
+            id: 25,
+            content: "2014-01-31",
+        },
+        {
+            id: 26,
+            content: "2014-02-28",
         },
     ];
 
@@ -93,14 +214,23 @@ function Topbar() {
         },
     ];
 
-    const handleTimePeriodClick = () =>
-        setIsTimePeriodActive((prevState) => !prevState);
+    const handleStartDateClick = () =>
+        setIsStartDateActive((prevState) => !prevState);
+
+    const handleEndDateClick = () =>
+        setIsEndDateActive((prevState) => !prevState);
+
     const handleNeighborhoodClick = () =>
         setIsNeighborhoodActive((prevState) => !prevState);
 
-    const handleTimePeriodChange = (e: React.MouseEvent<HTMLUListElement>) => {
+    const handleStartDateChange = (e: React.MouseEvent<HTMLUListElement>) => {
         const target = e.target as HTMLLIElement;
-        setTimePeriod(target.textContent as string);
+        setStartDate(target.textContent as string);
+    };
+
+    const handleEndDateChange = (e: React.MouseEvent<HTMLUListElement>) => {
+        const target = e.target as HTMLLIElement;
+        setEndDate(target.textContent as string);
     };
 
     const handleNeighborhoodChange = (
@@ -110,18 +240,33 @@ function Topbar() {
         setNeighborhood(target.textContent as string);
     };
 
+    useEffect(() => setDevices(data), []);
+
     return (
         <Container>
             <FlexContainer>
                 <SelectDropDownContainer>
-                    <SelectDropdownOption onClick={handleTimePeriodClick}>
-                        <p>time period</p> <span>{timePeriod}</span>
+                    <SelectDropdownOption onClick={handleStartDateClick}>
+                        <p>start date</p> <span>{startDate}</span>
                     </SelectDropdownOption>
                     <SelectDropdownOptions
                         className={
-                            !isTimePeriodActive ? "is-time-period-active" : ""
+                            !isStartDateActive ? "is-start-date-active" : ""
                         }
-                        onClick={handleTimePeriodChange}
+                        onClick={handleStartDateChange}
+                    >
+                        {timePeriods.map(({ id, content }) => (
+                            <li key={id}>{content}</li>
+                        ))}
+                    </SelectDropdownOptions>
+                </SelectDropDownContainer>
+                <SelectDropDownContainer>
+                    <SelectDropdownOption onClick={handleEndDateClick}>
+                        <p>end date</p> <span>{endDate}</span>
+                    </SelectDropdownOption>
+                    <SelectDropdownOptions
+                        className={!isEndDateActive ? "is-end-date-active" : ""}
+                        onClick={handleEndDateChange}
                     >
                         {timePeriods.map(({ id, content }) => (
                             <li key={id}>{content}</li>
