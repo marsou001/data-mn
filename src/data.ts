@@ -1,4 +1,6 @@
-{
+import { IDates } from './interfaces';
+
+export const data: IDates = {
   "2011-12-31": {
     "index": 0,
     "data": [
