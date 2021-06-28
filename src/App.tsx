@@ -35,11 +35,25 @@ function App() {
     const handleStartDateChange = (e: React.MouseEvent<HTMLUListElement>) => {
         const target = e.target as HTMLLIElement;
         setStartDate(target.textContent as string);
+        
+        const index = data.findIndex((p) => p.period === target.textContent);
+        const devices = data.filter((_, i) => i < index);
+        setDevices(devices);
     };
 
     const handleEndDateChange = (e: React.MouseEvent<HTMLUListElement>) => {
         const target = e.target as HTMLLIElement;
         setEndDate(target.textContent as string);
+
+        let index: number;
+        data.forEach((p, i) => {
+          if (p.period === target.textContent) {
+            index = i;
+          }
+        });
+
+        const devices = data.filter((_, i) => i > index);
+        setDevices(devices);
     };
 
     const handleNeighborhoodChange = (
@@ -47,26 +61,28 @@ function App() {
     ) => {
         const target = e.target as HTMLLIElement;
         setNeighborhood(target.textContent as string);
+
+        const devices = data.filter((device) => device.Area === target.textContent);
+        setDevices(devices);
     };
 
     const value = {
-      startDate,
-      endDate,
-      neighborhood,
-      handleStartDateChange,
-      handleEndDateChange,
-      handleNeighborhoodChange
-    }
+        startDate,
+        endDate,
+        neighborhood,
+        handleStartDateChange,
+        handleEndDateChange,
+        handleNeighborhoodChange,
+    };
 
     useEffect(() => setDevices(data), []);
 
     return (
         <Router>
             <Context.Provider value={value}>
-
-            <Sidebar />
-            <Topbar />
-            <Main />
+                <Sidebar />
+                <Topbar />
+                <Main />
             </Context.Provider>
         </Router>
     );
