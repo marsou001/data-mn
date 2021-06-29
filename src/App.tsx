@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { data } from "./data/dates";
 import { IDates, IData } from "./interfaces/dates";
@@ -82,6 +82,8 @@ function App() {
         handleNeighborhoodChange,
         handleDeviceChange,
     };
+
+    useEffect(() => finaliseData("2011-12-31", "2011-12-31", "Agdal"), []);
 
     return (
         <Router>
