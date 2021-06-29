@@ -11,12 +11,11 @@ const Container = styled.main`
 function Main() {
     return (
         <Container>
-            
-                <Switch>
-                    <Route path="/" exact component={GeneralOverview} />
-                    <Route path="/device-view" component={DeviceView} />
-                    <Route path="/billing" component={Billing} />
-                </Switch>
+            <Switch>
+                <Route path="/" exact component={GeneralOverview} />
+                <Route path="/device-view" component={DeviceView} />
+                <Route path="/billing" component={Billing} />
+            </Switch>
         </Container>
     );
 }

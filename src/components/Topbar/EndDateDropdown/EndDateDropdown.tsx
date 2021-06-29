@@ -21,7 +21,7 @@ function EndDateDropdown() {
                 onClick={handleEndDateChange}
             >
                 {timePeriods.map(({ id, content }) => (
-                    <li key={id} data-function='end-date'>{content}</li>
+                    <li key={id}>{content}</li>
                 ))}
             </Options>
         </Container>

@@ -30,3 +30,7 @@ code {
 .is-neighborhood-active {
   display: none;
 }
+
+.is-device-active {
+  display: none;
+}

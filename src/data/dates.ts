@@ -1,4 +1,4 @@
-import { IDates } from './interfaces';
+import { IDates } from '../interfaces/dates';
 
 export const data: IDates = {
   "2011-12-31": {

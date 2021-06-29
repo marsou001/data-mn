@@ -1,7 +1,7 @@
-import { useState, useEffect, createContext } from "react";
+import React, { useState, createContext } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { data } from "./data";
-import { IDates, IDate, IData } from "./interfaces";
+import { data } from "./data/dates";
+import { IDates, IData } from "./interfaces/dates";
 import Main from "./components/Main/Main";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Topbar from "./components/Topbar/Topbar";
@@ -9,97 +9,79 @@ import Topbar from "./components/Topbar/Topbar";
 export const Context = createContext<any>(null);
 
 function App() {
-    const [devices, setDevices] = useState<IData[]>();
+    const [devices, setDevices] = useState<IData[]>([]);
     const [startDate, setStartDate] = useState<keyof IDates>("2011-12-31");
     const [endDate, setEndDate] = useState<keyof IDates>("2011-12-31");
     const [neighborhood, setNeighborhood] = useState("Agdal");
+    const [device, setDevice] = useState("");
 
-    const current = {
-        startDate: "",
-        endDate: "",
-        neighborHood: "",
-    };
+    const finaliseData = (
+      startDate: keyof IDates,
+      endDate: keyof IDates,
+      neighborhood: string,
+  ) => {
+      const dates: IDates = { ...data };
+      let devices: IData[] = [];
+      let startIndex: number;
+      let endIndex: number;
 
-    const handleChange = (e: React.MouseEvent<HTMLUListElement>) => {
-        let index: number;
-        let devices: IDate[] = [];
-        const target = e.target as HTMLLIElement;
-        const option = target.textContent as keyof IDates;
+      startIndex = dates[startDate].index;
+      endIndex = dates[endDate].index;
 
-        switch (target.dataset.function) {
-            case "start-date":
-                current.startDate = option;
-                setStartDate(option);
+      for (let date in dates) {
+          if (dates[date as keyof IDates].index >= startIndex && dates[date as keyof IDates].index <= endIndex) {
+              devices.concat(dates[date as keyof IDates].data);
+          }
+      }
 
-                index = data[option].index;
-
-                for (let date in data) {
-                    if (data[date as keyof IDates].index >= index) {
-                        devices.concat(data[date as keyof IDates]);
-                    }
-                }
-
-                break;
-            case "end-date":
-                setEndDate(option);
-                current.endDate = option;
-
-                index = data[option].index;
-
-                for (let date in data) {
-                    if (data[date as keyof IDates].index <= index) {
-                        devices.concat(data[date as keyof IDates].data);
-                    }
-                }
-
-                setDevices(devices);
-                break;
-            case "neighborhood":
-                setNeighborhood(target.textContent as string);
-                current.neighborHood = target.textContent as string;
-
-                devices = data.filter(
-                    (device) => device.Area === target.textContent
-                );
-                setDevices(devices);
-                break;
-        }
-
-        //filteredDevices = filteredDevices.filter((device) => )
-    };
+      devices = devices.filter((device) => device.Area === neighborhood);
+      
+      setDevices(devices);;
+  };
 
     const handleStartDateChange = (e: React.MouseEvent<HTMLUListElement>) => {
         const target = e.target as HTMLLIElement;
-        setStartDate(target.textContent as keyof IDates);
+        const option = target.textContent as keyof IDates;
+        setStartDate(option);
+
+        finaliseData(option, endDate, neighborhood);
     };
 
     const handleEndDateChange = (e: React.MouseEvent<HTMLUListElement>) => {
         const target = e.target as HTMLLIElement;
-        setEndDate(target.textContent as keyof IDates);
+        const option = target.textContent as keyof IDates;
+        setEndDate(option);
+
+        finaliseData(startDate, option, neighborhood);
     };
 
     const handleNeighborhoodChange = (
         e: React.MouseEvent<HTMLUListElement>
     ) => {
         const target = e.target as HTMLLIElement;
-        setNeighborhood(target.textContent as string);
-    };
+        const option = target.textContent as keyof IDates;
+        setNeighborhood(option as string);
 
-    const finaliseData = () => {
-      const date = {...data};
-      
-    };
+        finaliseData(startDate, endDate, option);
+    };    
+
+    const handleDeviceChange = (e: React.MouseEvent<HTMLUListElement>) => {
+        const target = e.target as HTMLLIElement;
+        const option = target.textContent as keyof IDates;
+        setDevice(option as string);
+    }
 
     const value = {
+        devices,
         startDate,
         endDate,
+        device,
         neighborhood,
         handleStartDateChange,
         handleEndDateChange,
         handleNeighborhoodChange,
+        handleDeviceChange,
     };
-
-    useEffect(() => setDevices(data), []);
 
     return (
         <Router>

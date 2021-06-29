@@ -1,0 +1,53 @@
+import styled from 'styled-components';
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+
+const Container = styled.div``;
+
+const Header = styled.h1`
+    font-size: 2.1rem;
+    font-family: lora, sans-serif;
+    font-weight: 700;
+    margin-top: 35px;
+    margin-bottom: 0;
+`;
+
+const TextHeader = styled.p`
+    color: #B4B8C5;    
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-top: 5px;
+    margin-bottom: 30px;
+`;
+
+function Map() {
+    const { isLoaded, loadError } = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY!,       
+    });
+    
+    const center = {
+        lat: 33.9601172,
+        lng: -6.8407772,
+    }
+
+    const mapContainerStyle = {
+        width: '74%',
+        height: 350,
+    }
+
+    if (loadError) return <div>Error loading map</div>;
+
+    if (!isLoaded) return <div>Loading map</div>;
+    
+    return (
+        <Container>
+            <Header>Map overview</Header>
+            <TextHeader>Budapest city center</TextHeader>
+            <GoogleMap mapContainerStyle={mapContainerStyle} zoom={16} center={center}>
+                <Marker position={center} />
+            </GoogleMap>
+        </Container>
+    )
+}
+
+export default Map;
