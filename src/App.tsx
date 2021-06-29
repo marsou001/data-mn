@@ -36,7 +36,7 @@ function App() {
 
       devices = devices.filter((device) => device.Area === neighborhood);
       
-      setDevices(devices);;
+      setDevices(devices);
   };
 
     const handleStartDateChange = (e: React.MouseEvent<HTMLUListElement>) => {

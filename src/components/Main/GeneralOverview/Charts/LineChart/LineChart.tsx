@@ -1,5 +1,9 @@
+import { useContext } from "react";
 import styled from "styled-components";
 import { Line } from "react-chartjs-2";
+import { Context } from "../../../../../App";
+import { data } from "../../../../../data/dates";
+import { IDates, IData } from "../../../../../interfaces/dates";
 
 const Container = styled.div`
     background-color: #fff;
@@ -9,20 +13,39 @@ const Container = styled.div`
 `;
 
 function LineChart() {
+    const { devices } = useContext(Context);
+
+    const dates = Array.from(new Set([...devices.map((device: IData) => device.period)]));
+    const consumption: number[] = [];
+
+    dates.forEach((date) => {
+        const consumptionArray = data[date as keyof IDates].data.map((device) => device.Consumption);
+        const sumOfConsumptions = consumptionArray.reduce((acc, num) => acc + num, 0);
+        consumption.push(sumOfConsumptions);
+    });
+
     return (
         <Container>
             <Line
                 type="line"
                 data={{
-                    labels: ["15.06", "15.07"],
+                    labels: dates,
                     datasets: [
                         {
                             label: "Consumption",
-                            data: [233, 333],
+                            data: consumption,
                             backgroundColor: "#ED7D31",
-                            borderColor: "#ED7D31",
+                            borderColor: "#f0ab7d",
+                            fill: true,
                         },
                     ],
+                }}
+                options={{
+                    elements: {
+                        line: {
+                            tension: 0.5,
+                        }
+                    }
                 }}
             />
         </Container>
