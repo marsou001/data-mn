@@ -19,17 +19,20 @@ const Field = styled.div`
         font-weight: bold;
         text-transform: uppercase;
         letter-spacing: 0.1rem;
+        width: 30%;
         margin: 0;
     }
     span {
         color: green;
+        display: block;
+        width: 20%;
     }
 `;
 
 function Difference() {
     const { devices } = useContext(Context);
 
-    const consumption = devices.map((device: IData) => device.Consumption).reduce((acc: number, sum: number) => acc + sum, 0);
+    const consumption = devices.map((device: IData) => device.Consumption).reduce((acc: number, sum: number) => acc + sum, 0).toFixed(0);
 
     return (
         <Container>

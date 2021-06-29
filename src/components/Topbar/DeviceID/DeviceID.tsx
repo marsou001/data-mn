@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import { Context } from "../../../App";
-import timePeriods from "../timePeriods.json";
 import { Container, Option, Title, Content, Options } from '../styles';
 
 function DeviceID() {
@@ -9,6 +8,29 @@ function DeviceID() {
     const { device, handleDeviceChange } = useContext(Context);
 
     const handleDeviceClick = () => setIsDeviceActive((prevState) => !prevState);
+
+    const placeholder = [
+        {
+            id: 1,
+            content: '1',
+        },
+        {
+            id: 2,
+            content: '2',
+        },
+        {
+            id: 3,
+            content: '3',
+        },
+        {
+            id: 4,
+            content: '4',
+        },
+        {
+            id: 5,
+            content: '5',
+        },
+    ];
 
     return (
         <Container>
@@ -19,7 +41,7 @@ function DeviceID() {
                 className={!isDeviceActive ? "is-device-active" : ""}
                 onClick={handleDeviceChange}
             >
-                {timePeriods.map(({ id, content }) => (
+                {placeholder.map(({ id, content }) => (
                     <li key={id}>{content}</li>
                 ))}
             </Options>

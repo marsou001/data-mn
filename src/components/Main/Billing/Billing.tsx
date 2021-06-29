@@ -1,9 +1,37 @@
+import styled from "styled-components";
+// import { PDFViewer, Document, Page, View, Text, StyleSheet } from "@react-pdf/renderer";
+
+const Container = styled.div``;
+
+// const styles = StyleSheet.create({
+//     page: {
+//         flexDirection: "row",
+//         backgroundColor: "#FFF",
+//     },
+//     section: {
+//         margin: 10,
+//         padding: 10,
+//         flexGrow: 1,
+//     },
+// });
+
 function Billing() {
     return (
-        <div>
-            Billing
-        </div>
-    )
+        <Container>
+            {/* <PDFViewer>
+            <Document>
+                <Page size="A4" style={styles.page}>
+                    <View style={styles.section}>
+                        <Text>Section #1</Text>
+                    </View>
+                    <View style={styles.section}>
+                        <Text>Section #2</Text>
+                    </View>
+                </Page>
+            </Document>
+            </PDFViewer> */}
+        </Container>
+    );
 }
 
-export default Billing
+export default Billing;

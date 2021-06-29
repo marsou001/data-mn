@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Route } from "react-router-dom";
 import { useLocation } from "react-router";
 import StartDateDropdown from "./StartDateDropdown/StartDateDropdown";
 import EndDateDropdown from "./EndDateDropdown/EndDateDropdown";
@@ -20,13 +19,13 @@ const FlexContainer = styled.div`
 
 const ThirdOption: React.FC = () => {
     const location = useLocation();
+
     return (
         (location.pathname === '/device-view') ? <DeviceID /> : <NumberOfDevices />
     )
 }
 
 function Topbar() {
-
     return (
         <Container>
             <FlexContainer>
@@ -34,7 +33,6 @@ function Topbar() {
                 <EndDateDropdown />
                 <NeighborhoodDropdown />
                 <ThirdOption />
-                <Route path='/device-view' exact component={DeviceID} />
             </FlexContainer>
         </Container>
     );

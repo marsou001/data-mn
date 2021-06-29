@@ -30,7 +30,7 @@ function App() {
 
       for (let date in dates) {
           if (dates[date as keyof IDates].index >= startIndex && dates[date as keyof IDates].index <= endIndex) {
-              devices.concat(dates[date as keyof IDates].data);
+            devices = devices.concat(dates[date as keyof IDates].data);
           }
       }
 

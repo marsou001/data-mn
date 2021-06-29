@@ -19,6 +19,7 @@ const FieldHead = styled.div`
     justify-content: space-between;
     > p {
         color: blue;
+        width: 14%;
     }
 `;
 
@@ -27,6 +28,8 @@ const FieldRow = styled.div`
     justify-content: space-between;
     > p {
         color: #666;
+        width: 15%;
+        margin: 10px 0;
     }
 `;
 
