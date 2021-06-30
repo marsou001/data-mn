@@ -13,14 +13,14 @@ const Container = styled.div`
 `;
 
 function BarChart() {
-    const { devices } = useContext(Context);
+    const { devices, neighborhood } = useContext(Context);
 
     const dates = Array.from(new Set([...devices.map((device: IData) => device.period)]));
     const consumption: number[] = [];
     const distribution: number[] = [];
 
     dates.forEach((date) => {
-        const consumptionArray = data[date as keyof IDates].data.map((device) => device.Consumption);
+        const consumptionArray = data[date as keyof IDates].data.filter((device) => device.Area === neighborhood).map((device) => device.Consumption);
         const sumOfConsumptions = consumptionArray.reduce((acc, num) => acc + num, 0);
         consumption.push(sumOfConsumptions);
     });
