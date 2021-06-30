@@ -31,33 +31,7 @@ const styles = StyleSheet.create({
         color: '#666',
         fontSize: '25px',
         fontWeight: 'normal',
-    },
-    invoiced: {
-        color: '#666',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 40,
-    },
-    invoicedName: {
-        color: '#666',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 5,
-        marginBottom: 15,
-    },
-    invoicedLeft: {
-        textAlign: 'left',
-        width: '80px',
-    },
-    invoicedRight: {
-        textAlign: 'right',
-        width: 80,
-    },
-    recipient: {
-        color: '#000',
-        fontSize: '20px',
-        width: 110,
-    },
+    },                
     address: {
         color: '#666',
         flexDirection: 'row',
@@ -89,6 +63,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: 40,
+    },
+    left: {
+        textAlign: 'left',
     },
     right: {
         textAlign: 'right',
@@ -142,26 +119,26 @@ function Billing() {
                                 </Text>
                                 <Text style={styles.subheader}>Invoice #14020</Text>
                             </View>
-                            <View style={styles.invoiced}>
-                                <Text style={styles.invoicedLeft}>Invoiced from</Text>
-                                <Text style={styles.invoicedRight}>Invoiced to</Text>
+                            <View style={{ ...styles.greyColor, ...styles.flex, marginTop: 40}}>
+                                <Text style={{ ...styles.left, ...styles.small }}>Invoiced from</Text>
+                                <Text style={{ ...styles.right, ...styles.small }}>Invoiced to</Text>
                                 <Text></Text>
                             </View>
-                            <View style={styles.invoicedName}>
-                                <Text style={styles.recipient}>REDAL</Text>
-                                <Text style={styles.recipient}>Sami Lantry</Text>
+                            <View style={{  ...styles.blackColor, ...styles.flex, marginTop: 5, marginBottom: 20 }}>
+                                <Text style={{ ...styles.medium, fontSize: 20 }}>REDAL</Text>
+                                <Text style={{ ...styles.medium, fontSize: 20 }}>Sami Lantry</Text>
                             </View>
-                            <View style={styles.address}>
-                                <Text style={styles.addressRues}>6 Rue Al Hoceima,</Text>
-                                <Text style={styles.addressRuesRight}>15 Rue des Copilotes</Text>
+                            <View style={{ ...styles.greyColor, ...styles.flex }}>
+                                <Text style={{ ...styles.large }}>6 Rue Al Hoceima,</Text>
+                                <Text style={{ ...styles.large, ...styles.right }}>15 Rue des Copilotes</Text>
                             </View>
-                            <View style={styles.address}>
-                                <Text style={styles.addressArea}>Centre Ville</Text>
-                                <Text style={styles.addressAreaRight}>Agdal</Text>
+                            <View style={{ ...styles.greyColor, ...styles.flex }}>
+                                <Text style={{ ...styles.medium }}>Centre Ville</Text>
+                                <Text style={{ ...styles.medium, ...styles.right }}>Agdal</Text>
                             </View>
-                            <View style={styles.address}>
-                                <Text style={styles.addressCity}>Rabat</Text>
-                                <Text style={styles.addressCityRight}>Rabat</Text>
+                            <View style={{ ...styles.greyColor, ...styles.flex }}>
+                                <Text style={{ ...styles.small }}>Rabat</Text>
+                                <Text style={{ ...styles.small, ...styles.right }}>Rabat</Text>
                             </View>
                             <View style={{...styles.greyColor, ...styles.flex, marginTop: 40,}}>
                                 <Text>INVOICE ID</Text>
