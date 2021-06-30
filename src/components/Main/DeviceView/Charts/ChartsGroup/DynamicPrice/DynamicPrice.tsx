@@ -1,22 +1,23 @@
+import { useContext } from "react";
 import { Line } from "react-chartjs-2";
 import { ChartContainer as Container } from "../ChartsGroup";
+import { IData } from "../../../../../../interfaces/dates";
+import { Context } from '../../../../../../App';
 
 function DynamicPrice() {
-    const labels = [
-        "2012-05-31",
-        "2012-05-31",
-        "2012-05-31",
-        "2012-05-31",
-        "2012-05-31",
-    ];
-    const dynamicPrice = [333, 333, 333, 333, 333];
+    const { device: targetDevice, devices } = useContext(Context);
+
+    const deviceIDs: IData[] = devices.filter((device: IData) => device.DeviceID === targetDevice);
+    const dates = deviceIDs.map((deviceID: IData) => deviceID.period);
+    const dynamicPrice = deviceIDs.map((deviceID: IData) => deviceID.Consumption);
+
     return (
         <Container>
             <h3>Dynamic price</h3>
             <Line
                 type="line"
                 data={{
-                    labels,
+                    labels: dates,
                     datasets: [
                         {
                             label: "Dynamic price",

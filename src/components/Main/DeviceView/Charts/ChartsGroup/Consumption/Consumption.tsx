@@ -1,15 +1,15 @@
+import { useContext } from "react";
 import { Line } from "react-chartjs-2";
 import { ChartContainer as Container } from "../ChartsGroup";
+import { IData } from "../../../../../../interfaces/dates";
+import { Context } from "../../../../../../App";
 
 function Consumption() {
-    const labels = [
-        "2012-05-31",
-        "2012-05-31",
-        "2012-05-31",
-        "2012-05-31",
-        "2012-05-31",
-    ];
-    const consumption = [333, 333, 333, 333, 333];
+    const { device: targetDevice, devices } = useContext(Context);
+
+    const deviceIDs: IData[] = devices.filter((device: IData) => device.DeviceID === targetDevice);
+    const dates = deviceIDs.map((deviceID: IData) => deviceID.period);
+    const consumption = deviceIDs.map((deviceID: IData) => deviceID.Consumption);
 
     return (
         <Container>
@@ -17,7 +17,7 @@ function Consumption() {
             <Line
                 type="line"
                 data={{
-                    labels,
+                    labels: dates,
                     datasets: [
                         {
                             label: "Consumption",

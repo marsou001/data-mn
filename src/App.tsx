@@ -67,7 +67,7 @@ function App() {
 
     const handleDeviceChange = (e: React.MouseEvent<HTMLUListElement>) => {
         const target = e.target as HTMLLIElement;
-        const option = target.textContent as keyof IDates;
+        const option = target.textContent as string;
         setDevice(option as string);
     }
 
